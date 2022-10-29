@@ -14,11 +14,11 @@
 # Simple build/running directions are below:
 #
 # Build:
-#   $ arch=
-#   $ docker build -t yottadb/yottadb:latest --build-arg ARCH=$arch .
+#   $ arch= # valid choices from the official ubuntu image: amd64, arm32v7, arm64v8, i386, ppc64le, riscv64, s390x
+#   $ docker build -t yottadb/yottadb:${arch} --build-arg ARCH=$arch .
 #
 # Use with data persistence:
-#   $ docker run --rm -e ydb_chset=utf-8 -v `pwd`/ydb-data:/data -ti yottadb/yottadb:latest
+#   $ docker run --rm -e ydb_chset=utf-8 -v `pwd`/ydb-data:/data -ti yottadb/yottadb:${arch}
 
 ARG ARCH=
 ARG OS_VSN=20.04

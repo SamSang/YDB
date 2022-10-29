@@ -166,11 +166,11 @@ docker run --rm -it yottadb/yottadb # you can add a specific version after a ":"
 1) Build the image
    ```
    $ arch=arm64v8 # valid choices from the official ubuntu image: amd64, arm32v7, arm64v8, i386, ppc64le, riscv64, s390x
-   $ docker build -t yottadb/yottadb:latest --build-arg ARCH=$arch . 
+   $ docker build -t yottadb/yottadb:${arch} --build-arg ARCH=$arch . 
    ```
 2) Run the created image
    ```
-   docker run --rm -it yottadb/yottadb:latest
+   docker run --rm -it yottadb/yottadb:${arch}
    ```
 
 ## FAQ
