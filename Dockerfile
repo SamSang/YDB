@@ -14,15 +14,17 @@
 # Simple build/running directions are below:
 #
 # Build:
-#   $ docker build -t yottadb/yottadb:latest .
+#   $ arch=
+#   $ docker build -t yottadb/yottadb:latest --build-arg ARCH=$arch .
 #
 # Use with data persistence:
 #   $ docker run --rm -e ydb_chset=utf-8 -v `pwd`/ydb-data:/data -ti yottadb/yottadb:latest
 
+ARG ARCH=
 ARG OS_VSN=20.04
 
 # Stage 1: YottaDB build image
-FROM ubuntu:${OS_VSN} as ydb-release-builder
+FROM ${ARCH}/ubuntu:${OS_VSN} as ydb-release-builder
 
 ARG CMAKE_BUILD_TYPE=Release
 ARG DEBIAN_FRONTEND=noninteractive
@@ -80,7 +82,7 @@ RUN mkdir -p /tmp/yottadb-build \
  && make install
 
 # Stage 2: YottaDB release image
-FROM ubuntu:${OS_VSN} as ydb-release
+FROM ${ARCH}/ubuntu:${OS_VSN} as ydb-release
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN --mount=type=bind,from=ydb-release-builder,source=/tmp/yottadb-release,target=/tmp/staging \
